@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ tema.titulo }}{% endblock %}
+
+{% block content %}
+<h2>{{ tema.titulo }}</h2>
+<p class="lead">{{ tema.descripcion }}</p>
+
+<!-- Carrusel de imágenes Bootstrap -->
+<div id="carruselTema" class="carousel slide my-4 w-75 mx-auto shadow" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for img in tema.imagenes %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{% static img %}" class="d-block w-100" alt="Imagen del tema" style="max-height: 400px; object-fit: cover;">
+            </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carruselTema" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carruselTema" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<a href="{% url 'inicio:home' %}" class="btn btn-secondary mt-3">Volver al Inicio</a>
+{% endblock %}
